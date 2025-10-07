@@ -160,9 +160,14 @@ if clear_clicked:
 if cross_passenger:
     st.warning("eSGVs cannot be combined with multiple passengers. Please clear selection.")
 
-def new_serial(prefix="SR"):
-    ts = datetime.now().strftime("%Y%m%d%H%M%S")
-    return f"{prefix}{ts}{random.randint(1000,9999)}"
+def new_serial(prefix="SR1000000"):
+    existing = set(st.session_state["df"]["Voucher Serial No."].astype(str))
+    while True:
+        # Generate 7 random digits
+        sn = f"{prefix}{random.randint(1000000, 9999999)}"
+        if sn not in existing:
+            return sn
+
 
 def generate_qr_and_update(picked_serials, passenger_name):
     base_df = st.session_state["df"]

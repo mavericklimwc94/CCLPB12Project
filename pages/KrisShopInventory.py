@@ -339,3 +339,12 @@ if catalog:
                     )
 else:
     st.warning("No catalog loaded. Please run your KrisShop downloader to create `catalog_krisshop.json`.")
+
+# Navigation back to eSGV
+with st.popover("Navigate"):
+    st.write("App preferences")
+    if st.button("Go back to Combine eSGV"):
+        try:
+            st.switch_page("eSGV.py")
+        except Exception:
+            st.error("Could not navigate. Expected path: eSGV.py")
